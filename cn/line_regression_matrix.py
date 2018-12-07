@@ -17,8 +17,8 @@ y = tf.placeholder(tf.float32, [200, 1])
 
 weights = tf.Variable(tf.random_normal([1, 10]))
 bias = tf.Variable(tf.zeros([1, 10]))
-
-L1 = tf.nn.tanh(tf.matmul(x, weights) + bias)
+Y1 = tf.matmul(x, weights) + bias
+L1 = tf.nn.tanh(Y1)
 
 weights2 = tf.Variable(tf.random_normal([10, 1]))
 bias2 = tf.Variable(tf.zeros([1, 1], tf.float32))
@@ -61,3 +61,5 @@ ani = animation.FuncAnimation(fig=fig,
                               interval=20,
                               blit=False)
 plt.show()
+
+# 为什么此示例用sigmoid 及其它激活函数 不行 TODO 20181207 wm

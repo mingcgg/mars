@@ -118,7 +118,7 @@ for i in range(2000):
     decay_speed = 2000.0
     learning_rate = min_learning_rate + (max_learning_rate - min_learning_rate) * math.exp(-i/decay_speed)
 
-    sess.run(train_step, {X: batch_X, Y_: batch_Y, lr: learning_rate})
+    sess.run(train_step, {X: batch_X, Y_: batch_Y, lr: 0.003})
     # compute training values for visualisation
     if i % 500 == 0:
         a, c, w, b = sess.run([accuracy, cross_entropy, allweights, allbiases], {X: batch_X, Y_: batch_Y})
