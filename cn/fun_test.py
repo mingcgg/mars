@@ -4,25 +4,29 @@ from numpy import float32
 
 sess = tf.Session()
 
+#从一个均匀分布[low,high)中随机采样
+uniform = np.random.uniform(0,10,[2,10])
+print(uniform)
+
 """
     matrix truncted slice 分割
 """
 random_num = tf.truncated_normal(shape=[4, 28, 28, 1], stddev=1)
 print(random_num)
 print(random_num.shape)
-shift = tf.slice(random_num, [0, 0, 0, 0], [1, 28, 28, 1]) # begin size
+shift = tf.slice(random_num, [0, 0, 0, 0], [1, 28, 28, 1]) # begin size  , length
 print(shift.shape)
 shift_sq= tf.squeeze(shift)
 print(shift_sq.shape)
 """
     reduce_mean reduce_sum  按照维度求和求平均
 """
-input_data = np.asarray([[ 0.7767287,   0.38119382], [-1.8936255,  -1.2566669 ]], float32)
+input_data = np.asarray([[[ 1, 2, 3], [6, 7, 8]], [[ 2, 2, 3],[6, 7, 8]]], float32)
 
 #input_tensor = tf.truncated_normal([3], dtype=tf.float32) #不能直接用于求秒求平均，暂时还不知道为什么TOODO
-reduce_mean = tf.reduce_mean(input_data)
+reduce_mean = tf.reduce_mean(input_data, [1, 2])
 reduce_sum = tf.reduce_sum(input_data)
-
+print(sess.run(reduce_mean))
 
 """
 [[ 0.7767287,   0.38119382]

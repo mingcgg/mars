@@ -20,6 +20,7 @@ print(x_test.shape[0], 'test samples')
 p1 = x_train[1].reshape(28, 28)
 #p1 = p1 * 100;
 print(p1)
+print(p1.dtype)
 
 plt.imshow(p1, cmap = "inferno")
 plt.colorbar() 
