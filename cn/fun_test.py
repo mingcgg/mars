@@ -1,13 +1,30 @@
 import tensorflow as tf 
 import numpy as np
 from numpy import float32
+import random
 
-sess = tf.Session()
+#sess = tf.Session()
+"""
+    matrix concat
+"""
+data1 = np.random.uniform(-1,1,[1,29,29,3])
+data2 = np.random.uniform(-1,1,[1,29,29,3])
+concat_result = tf.concat([data1, data2], 0)
+print(concat_result.shape)
+
+data1 = np.zeros(10, dtype = np.float32)
+data2 = np.zeros(10, dtype = np.float32)
+data1[1] = 1.0
+data1 = tf.expand_dims(data1,0)
+data2 = tf.expand_dims(data2,0)
+print(data1.shape)
+concat_result = tf.concat([data1, data2], 0)
+print(concat_result)
 
 #从一个均匀分布[low,high)中随机采样
 uniform = np.random.uniform(0,10,[2,10])
 print(uniform)
-
+print(random.randrange(10))
 """
     matrix truncted slice 分割
 """
@@ -26,7 +43,7 @@ input_data = np.asarray([[[ 1, 2, 3], [6, 7, 8]], [[ 2, 2, 3],[6, 7, 8]]], float
 #input_tensor = tf.truncated_normal([3], dtype=tf.float32) #不能直接用于求秒求平均，暂时还不知道为什么TOODO
 reduce_mean = tf.reduce_mean(input_data, [1, 2])
 reduce_sum = tf.reduce_sum(input_data)
-print(sess.run(reduce_mean))
+#print(sess.run(reduce_mean))
 
 """
 [[ 0.7767287,   0.38119382]

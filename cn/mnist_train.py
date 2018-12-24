@@ -4,7 +4,7 @@ from tensorflow.examples.tutorials.mnist import input_data as mnist_data
 from matplotlib import animation
 from matplotlib import pyplot as plt
 
-lrate = 0.0005
+lrate = 0.005
 
 #def create_graph():
 Y_ = tf.placeholder(tf.float32, shape=[None, 10])
@@ -49,9 +49,9 @@ def training_step(i):
     batch_x,  batch_y = mnist.train.next_batch(10)
     sess.run(train_step, feed_dict={X:batch_x, Y_:batch_y}) 
     _,accuracy_out, WW, cross_entropy_out = sess.run([train_step,accuracy, weights, cross_entropy], feed_dict={X:batch_x, Y_:batch_y})
-    if i % 500 == 0:
-        print("accuracy:", accuracy_out)
-        print("loss:", cross_entropy_out)
+    #if i % 500 == 0:
+    print("accuracy:", accuracy_out)
+    print("loss:", cross_entropy_out)
     # update imgs
     ws = np.hsplit(WW, 10) # 垂直分割
     ws = np.squeeze(ws)

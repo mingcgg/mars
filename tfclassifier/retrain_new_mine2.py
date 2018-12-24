@@ -189,10 +189,10 @@ def get_random_cached_bottlenecks(sess, image_lists, how_many, category,
                                           image_index, image_dir, category,
                                           bottleneck_dir, jpeg_data_tensor,
                                           bottleneck_tensor)
-    ground_truth = np.zeros(class_count, dtype=np.float32)
-    ground_truth[label_index] = 1.0
-    bottlenecks.append(bottleneck)
-    ground_truths.append(ground_truth)
+        ground_truth = np.zeros(class_count, dtype=np.float32)
+        ground_truth[label_index] = 1.0
+        bottlenecks.append(bottleneck)
+        ground_truths.append(ground_truth)
     return bottlenecks, ground_truths
 def main(_):
     if tf.gfile.Exists(FLAGS.summaries_dir):
@@ -232,7 +232,7 @@ def main(_):
       
     test_accuracy = sess.run(evaluation_step, feed_dict={bottleneck_input: test_bottlenecks, truth_input: test_ground_truth})
     print('Final test accuracy = %.1f%%' % (test_accuracy * 100))
-
+    tf.summary.FileWriter('./summaries', sess.graph)
     # Write out the trained graph and labels with the weights stored as constants.
     # 保存图和变量，及标签
     output_graph_def = graph_util.convert_variables_to_constants(sess, graph.as_graph_def(), ['final_result'])
