@@ -85,7 +85,7 @@ def train():
     logits, end_points = create_v3_model(input_placeholder, NUM_CLASSES)
     
     Y = tf.nn.softmax(logits, name='final_result')
-    cross_entropy = tf.nn.softmax_cross_entropy_with_logits(logits=logits, labels=Y_) #-tf.log(Y) * Y_
+    cross_entropy = tf.nn.softmax_cross_entropy_with_logits_v2(logits=logits, labels=Y_) #-tf.log(Y) * Y_
     loss = tf.reduce_mean(cross_entropy)
     train_step = tf.train.GradientDescentOptimizer(lr).minimize(loss)
     
@@ -96,13 +96,13 @@ def train():
     
     #input_data = np.random.uniform(0, 1, [BATCH_SIZE, 299, 299, 3])
     #y_label = np.random.uniform(0, 1, [BATCH_SIZE, NUM_CLASSES])
-    for idx in range(200):
-        image_list = create_image_list(IMAGE_DIR)
-        input_data, y_truth = get_random_images(image_list, 20)
+    image_list = create_image_list(IMAGE_DIR)
+    for idx in range(100):
+        input_data, y_truth = get_random_images(image_list, 10)
         with sess.as_default():
             input_data = input_data.eval()
             y_truth = y_truth.eval()
-        _, LOSS, ACCURACY = sess.run([train_step, loss, accuracy], feed_dict={input_placeholder: input_data, Y_: y_truth})
+        _, LOSS, ACCURACY, LOGITS = sess.run([train_step, loss, accuracy, logits], feed_dict={input_placeholder: input_data, Y_: y_truth})
         print(idx,LOSS, ACCURACY)
     #tf.summary.FileWriter('./summaries', sess.graph)
     #save pb
@@ -118,3 +118,6 @@ def test():
 if __name__ == '__main__':
     train()
     #create_image_list(IMAGE_DIR)
+"""
+    1、训练样本每次批量传进去，效果明显
+"""

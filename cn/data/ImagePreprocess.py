@@ -5,7 +5,7 @@ MODEL_INPUT_WIDTH = 299
 MODEL_INPUT_HEIGHT = 299
 MODEL_INPUT_DEPTH = 3
 
-def add_input_distortions(flip_left_right, random_crop, random_scale, random_brightness):
+def add_input_distortions(flip_left_right=False, random_crop=100, random_scale=100, random_brightness=100):
     jpeg_data = tf.placeholder(tf.string, name='DistortJPGInput')
     decoded_image = tf.image.decode_jpeg(jpeg_data, channels=MODEL_INPUT_DEPTH)
     decoded_image_as_float = tf.cast(decoded_image, dtype=tf.float32)

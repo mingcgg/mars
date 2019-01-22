@@ -91,7 +91,7 @@ def train():
     # logits shape=[-1, NUM_CLASSES]
     logits = create_cnn_model(input_placeholder, NUM_CLASSES)
     # @see func_test.py 
-    # logits = logits / 10000
+    logits = logits / 10000
     Y = tf.nn.softmax(logits, name='final_result')
     cross_entropy = tf.nn.softmax_cross_entropy_with_logits(logits=logits, labels=Y_) #-tf.log(Y) * Y_
     loss = tf.reduce_mean(cross_entropy)
@@ -105,12 +105,12 @@ def train():
     #input_data = np.random.uniform(0, 1, [BATCH_SIZE, 299, 299, 3])
     #y_label = np.random.uniform(0, 1, [BATCH_SIZE, NUM_CLASSES])
     image_list = create_image_list(IMAGE_DIR)
-    for idx in range(5):
+    for idx in range(50):
         input_data, y_truth = get_random_images(image_list, 10)
         with sess.as_default():
             input_data = input_data.eval()
             y_truth = y_truth.eval()
-            input_data = input_data / 255
+            input_data = input_data
         _, LOSS, ACCURACY,LOGITS,YY= sess.run([train_step, loss, accuracy, logits, Y], feed_dict={input_placeholder: input_data, Y_: y_truth})
         print(idx,LOSS, ACCURACY) #
     #tf.summary.FileWriter('./summaries', sess.graph)

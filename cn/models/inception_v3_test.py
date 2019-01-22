@@ -42,6 +42,7 @@ class IncetionV3Test(tf.test.TestCase):
         width = 300
         num_classes = 10
         input_np = np.random.uniform(-1, 0, [batch_size, height, width, 3])
+        print(input_np.dtype)
         with tf.Session() as sess:
             inputs = tf.placeholder(tf.float32, [batch_size, height, width, 3])
             net, end_points = inception.inception_v3(inputs, num_classes)

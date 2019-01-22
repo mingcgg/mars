@@ -4,9 +4,13 @@ import numpy as np
 # tf.argmax tf.equal
 
 # pic pix number
+m3 = np.array([-1.0860619e+04, -3.1066400e+04,  8.4361855e+03,  9.1545703e+03, 6.3926133e+03,  2.5773247e+03, -1.1056079e+03,  9.8716855e+03])
+m3 = m3 / 10000
+#softmax 这个函数，传入的参数只有'大小合适'的 时候才会有比较正确的结果 ,好像是参数值小一点比较好
+Y_m3 = tf.nn.softmax(m3)
 m2 = np.array([[0, 0, 0, 0, 0.14917259, 0.210407, 0.669037, 0.8345183, 0, 0],
            [1, 2, 7, 4, 5, 8, 6, 3, 9, 0],
-           [1, 2, 7, 4, 5, 8, 6, 3, 9, 0]], dtype=np.float32)
+           [-10, 2, 7, 4, 5, 8, 6, 3, 9, 0]], dtype=np.float32)
 Y = tf.nn.softmax(m2)
 
 logY = tf.log(Y) 
@@ -24,6 +28,8 @@ multi_reduce_mean = tf.reduce_mean(data1)
 truncated = tf.truncated_normal([3, 2],stddev=1)
 with tf.Session() as sess: 
     r = sess.run(Y)
+    print(sess.run(Y_m3))
+    print(r)
     r2 = sess.run(logY)
     r3 = sess.run(multi)
     r4 = sess.run(multi_reduce_mean)

@@ -2,8 +2,16 @@ import tensorflow as tf
 import numpy as np
 from numpy import float32
 import random
+from tensorflow.python.framework import tensor_shape
 
+print(tensor_shape.scalar())
 #sess = tf.Session()
+input_data = [1, 2, 3, 4, 5, 6]
+#print(input_data.shape)
+input_data_reshape = np.reshape(input_data, newshape=[1, 6])
+print(input_data_reshape.shape)
+input_data_reshape = tf.reshape(input_data, [1, 6])
+print(input_data_reshape)
 """
     matrix concat
 """
@@ -11,6 +19,13 @@ data1 = np.random.uniform(-1,1,[1,29,29,3])
 data2 = np.random.uniform(-1,1,[1,29,29,3])
 concat_result = tf.concat([data1, data2], 0)
 print(concat_result.shape)
+
+t1 = [[1, 2, 3], [4, 5, 6]]
+t2 = [[7, 8, 9], [10, 11, 12]]
+t12 = tf.concat([t1, t2], 0)
+t34 = np.concatenate((t1, t2), axis=0)
+print(t12.shape)
+print(t34)
 
 data1 = np.zeros(10, dtype = np.float32)
 data2 = np.zeros(10, dtype = np.float32)

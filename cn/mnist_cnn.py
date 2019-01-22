@@ -65,7 +65,7 @@ sess = tf.Session()
 sess.run(tf.global_variables_initializer())
 tf.summary.FileWriter(summaries_dir, sess.graph)
 for idx in range(2000):
-    batch_x, batch_y = mnist.train.next_batch(100)
+    batch_x, batch_y = mnist.train.next_batch(20)
     _, LOSS, PREDICTION = sess.run([train_step,loss, prediction], feed_dict={X: batch_x, Y_: batch_y})
     if idx % 100 == 0:
         print(LOSS, PREDICTION)
@@ -78,3 +78,5 @@ ss = sess.run(shift)
 plt.imshow(ss, cmap = "inferno")
 plt.colorbar() 
 plt.show()
+
+# 每次到少量图片batch_size = 2/1，没什么效果，loss不会怎么减少20181224
